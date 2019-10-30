@@ -19,7 +19,6 @@ import androidx.appcompat.widget.TintTypedArray;
 
 import com.example.taobaodemo.R;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CnToolbar extends Toolbar {
 
     private LayoutInflater mInflater;
