@@ -19,6 +19,8 @@ import com.example.taobaodemo.R;
 import com.example.taobaodemo.adapter.HomeCatgoryAdapter;
 import com.example.taobaodemo.bean.Banner;
 import com.example.taobaodemo.bean.HomeCategory;
+import com.example.taobaodemo.http.OkHttpHelper;
+import com.example.taobaodemo.http.SpotsCallBack;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -28,7 +30,11 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -48,8 +54,10 @@ public class HomeFragment extends Fragment {
     private HomeCatgoryAdapter adapter;
 
     Gson gson = new Gson();
-    List<Banner> mBanner;
+    List<Banner> mBannerData;
     Handler mHandler = new Handler(Looper.getMainLooper());
+
+    OkHttpHelper httpHelper = OkHttpHelper.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,34 +80,14 @@ public class HomeFragment extends Fragment {
     private void getBannerData() {
 
         String url = "http://112.124.22.238:8081/course_api/banner/query?type=1";
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(url).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        httpHelper.get(url, new SpotsCallBack<List<Banner>>(getContext()) {
 
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-                String json = response.body().string();
-                Type type = new TypeToken<List<Banner>>() {
-                }.getType();
-                mBanner = gson.fromJson(json, type);
-
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        initSlider();
-                    }
-                });
+            public void onSuccess(Response response, List<Banner> banners) {
+                mBannerData = banners;
+                initSlider();
             }
         });
-
     }
 
     private void initRecyclerView() {
@@ -127,10 +115,10 @@ public class HomeFragment extends Fragment {
 
     private void initSlider() {
 
-        if (mBanner == null) {
+        if (mBannerData == null) {
             return;
         }
-        for (Banner banner : mBanner) {
+        for (Banner banner : mBannerData) {
             TextSliderView textSliderView = new TextSliderView(getContext());
             textSliderView.description(banner.getName()).image(banner.getImgUrl());
             sliderShow.addSlider(textSliderView);
