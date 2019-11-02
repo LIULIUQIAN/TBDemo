@@ -1,4 +1,6 @@
-package com.example.taobaodemo.bean;
+package com.example.taobaodemo.bean.home;
+
+import com.example.taobaodemo.bean.BaseBean;
 
 public class Banner extends BaseBean {
 

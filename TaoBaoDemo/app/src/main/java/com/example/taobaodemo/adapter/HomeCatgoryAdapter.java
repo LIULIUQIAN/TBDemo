@@ -10,8 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.taobaodemo.R;
-import com.example.taobaodemo.bean.HomeCategory;
+import com.example.taobaodemo.bean.home.HomeCampaign;
 
 import java.util.List;
 
@@ -19,10 +20,10 @@ public class HomeCatgoryAdapter extends RecyclerView.Adapter<HomeCatgoryAdapter.
 
 
     private LayoutInflater mInflater;
-    private List<HomeCategory> mDatas;
+    private List<HomeCampaign> mDatas;
     private Context mContext;
 
-    public HomeCatgoryAdapter(Context context,List<HomeCategory> datas) {
+    public HomeCatgoryAdapter(Context context,List<HomeCampaign> datas) {
         mDatas = datas;
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
@@ -36,11 +37,12 @@ public class HomeCatgoryAdapter extends RecyclerView.Adapter<HomeCatgoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HomeCategory category = mDatas.get(position);
-        holder.text_title.setText(category.getName());
-        holder.imgview_big.setImageResource(category.getImgBig());
-        holder.imgview_small_top.setImageResource(category.getImgSmallTop());
-        holder.imgview_small_bottom.setImageResource(category.getImgSmallBottom());
+        HomeCampaign category = mDatas.get(position);
+        holder.text_title.setText(category.getTitle());
+        Glide.with(mContext).load(category.getCpOne().getImgUrl()).into(holder.imgview_big);
+        Glide.with(mContext).load(category.getCpTwo().getImgUrl()).into(holder.imgview_small_top);
+        Glide.with(mContext).load(category.getCpThree().getImgUrl()).into(holder.imgview_small_bottom);
+
     }
 
     @Override
