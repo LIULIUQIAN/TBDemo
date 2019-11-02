@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,12 @@ public abstract class BaseAdapter<T, H extends BaseViewHolder> extends RecyclerV
     protected int layoutResId;
     protected LayoutInflater mInflater;
 
+    private OnItemClickListener mOnItemClickListener = null;
+
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
+    }
+
     public BaseAdapter(Context context, int layoutResId) {
         this(context, null, layoutResId);
     }
@@ -35,7 +42,7 @@ public abstract class BaseAdapter<T, H extends BaseViewHolder> extends RecyclerV
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(layoutResId, parent, false);
-        return new BaseViewHolder(view);
+        return new BaseViewHolder(view,mOnItemClickListener);
     }
 
     @Override
@@ -74,4 +81,8 @@ public abstract class BaseAdapter<T, H extends BaseViewHolder> extends RecyclerV
     }
 
     protected abstract void convert(H viewHodel, T item);
+
+    public void setmOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
 }
