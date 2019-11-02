@@ -45,4 +45,11 @@ dependencies {
 
     implementation 'commons-lang:commons-lang:2.6'
 
+    //上拉加载和刷新
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
+    //经典加载
+    implementation 'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
+    //经典刷新头
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.0-alpha-1'
+
 }
