@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
 
     private void initRecyclerView() {
 
-        OkHttpHelper.getInstance().get(Contants.API.CAMAIGN_HOME, new SpotsCallBack<List<HomeCampaign>>(getContext()) {
+        httpHelper.get(Contants.API.CAMAIGN_HOME, new SpotsCallBack<List<HomeCampaign>>(getContext()) {
 
             @Override
             public void onSuccess(Response response, List<HomeCampaign> homeCampaigns) {

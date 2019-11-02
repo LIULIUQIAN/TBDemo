@@ -62,7 +62,7 @@ public class HotFragment extends Fragment {
                 refreshLayout.finishLoadMore();
 
                 if (pageIndex == 1){
-                    mAdapter.clearData();
+                    mAdapter.clear();
                     refreshLayout.resetNoMoreData();
                 }
                 if (page.getList().size() < 10){
@@ -89,7 +89,7 @@ public class HotFragment extends Fragment {
     private void initView(){
         mRecyclerView = rootView.findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new HotWaresAdapter(getContext(),new ArrayList<Wares>());
+        mAdapter = new HotWaresAdapter(getContext(),null);
         mRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
