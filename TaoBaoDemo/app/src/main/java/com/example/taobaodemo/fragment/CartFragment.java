@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.taobaodemo.R;
 import com.example.taobaodemo.adapter.CartAdapter;
+import com.example.taobaodemo.utils.CartProvider;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,7 @@ public class CartFragment extends Fragment {
     private View rootView;
     private RecyclerView mRecyclerView;
     private CartAdapter cartAdapter;
+    private CartProvider cartProvider;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +41,10 @@ public class CartFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
         cartAdapter = new CartAdapter(getContext(),null);
         mRecyclerView.setAdapter(cartAdapter);
+
+        cartProvider = new CartProvider(getContext());
+        cartAdapter.clear();
+        cartAdapter.addData(cartProvider.getAll());
 
     }
 

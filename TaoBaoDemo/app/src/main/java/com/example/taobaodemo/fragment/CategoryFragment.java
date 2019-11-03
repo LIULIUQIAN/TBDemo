@@ -68,6 +68,7 @@ public class CategoryFragment extends Fragment {
     }
 
     private void initData() {
+        pageIndex = 1;
         getCategoryData();
         getBannerData();
     }

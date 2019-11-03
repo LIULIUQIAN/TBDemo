@@ -46,6 +46,7 @@ public class HotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_hot, container, false);
+        pageIndex = 1;
         initView();
         initData();
         return rootView;

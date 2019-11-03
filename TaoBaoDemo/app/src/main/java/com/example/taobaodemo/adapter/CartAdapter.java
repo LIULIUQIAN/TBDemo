@@ -1,7 +1,10 @@
 package com.example.taobaodemo.adapter;
 
 import android.content.Context;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.taobaodemo.R;
 import com.example.taobaodemo.bean.cart.ShoppingCart;
 
@@ -13,15 +16,17 @@ public class CartAdapter extends SimpleAdapter<ShoppingCart> {
     public CartAdapter(Context context, List<ShoppingCart> datas) {
         super(context, datas, R.layout.template_cart);
 
-        List<ShoppingCart> d =new ArrayList<ShoppingCart>();
-        for (int i = 0;i < 20;i++){
-            d.add(new ShoppingCart());
-        }
-        this.addData(d);
     }
 
     @Override
     protected void convert(BaseViewHolder viewHodel, ShoppingCart item) {
 
+        ImageView drawee_view = viewHodel.getImageView(R.id.drawee_view);
+        TextView text_title = viewHodel.getTextView(R.id.text_title);
+        TextView text_price = viewHodel.getTextView(R.id.text_price);
+
+        Glide.with(context).load(item.getImgUrl()).into(drawee_view);
+        text_title.setText(item.getName());
+        text_price.setText(item.getPrice().toString());
     }
 }
