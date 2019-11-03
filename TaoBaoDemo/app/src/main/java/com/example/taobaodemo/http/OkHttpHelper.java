@@ -54,7 +54,7 @@ public class OkHttpHelper {
         doRequest(request,callback);
     }
 
-    public void post(String url, Map<String, String> param, BaseCallback callback) {
+    public void post(String url, Map<String, Object> param, BaseCallback callback) {
 
         Request request = buildRequest(url, param, HttpMethodType.POST);
         doRequest(request,callback);
@@ -112,7 +112,7 @@ public class OkHttpHelper {
         });
     }
 
-    private Request buildRequest(String url, Map<String, String> param, HttpMethodType methodType) {
+    private Request buildRequest(String url, Map<String, Object> param, HttpMethodType methodType) {
 
         Request.Builder builder = new Request.Builder().url(url);
         if (methodType == HttpMethodType.POST) {
@@ -123,13 +123,13 @@ public class OkHttpHelper {
         return builder.build();
     }
 
-    private RequestBody builderFormData(Map<String, String> param) {
+    private RequestBody builderFormData(Map<String, Object> param) {
 
         FormBody.Builder body = new FormBody.Builder();
 
         if (param != null) {
-            for (Map.Entry<String, String> entry : param.entrySet()) {
-                body.add(entry.getKey(), entry.getValue());
+            for (Map.Entry<String, Object> entry : param.entrySet()) {
+                body.add(entry.getKey(), entry.getValue().toString());
             }
         }
         return body.build();

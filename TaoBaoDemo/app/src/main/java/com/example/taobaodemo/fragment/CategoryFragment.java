@@ -27,6 +27,8 @@ import com.example.taobaodemo.bean.hot.Page;
 import com.example.taobaodemo.bean.hot.Wares;
 import com.example.taobaodemo.http.OkHttpHelper;
 import com.example.taobaodemo.http.SpotsCallBack;
+import com.example.taobaodemo.utils.Pager;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
@@ -41,7 +43,7 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements Pager.OnPageListener {
 
 
     private RecyclerView recyclerview_category;
@@ -55,8 +57,8 @@ public class CategoryFragment extends Fragment {
     private RecyclerviewWaresAdapter waresAdapter;
     RefreshLayout refreshLayout;
 
-    private Integer pageIndex = 1;
     private Category currentCategory;
+    Pager pager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,9 +70,15 @@ public class CategoryFragment extends Fragment {
     }
 
     private void initData() {
-        pageIndex = 1;
+
+        pager = Pager.newBuilder()
+                .setUrl(Contants.API.WARES_LIST)
+                .setRefreshLayout(refreshLayout)
+                .setOnPageListener(this)
+                .build(getContext(), new TypeToken<Page<Wares>>(){}.getType());
         getCategoryData();
         getBannerData();
+
     }
 
     private void getBannerData() {
@@ -100,39 +108,8 @@ public class CategoryFragment extends Fragment {
     }
     private void getWaresData(long categoryId){
 
-        Map<String, String> params = new HashMap<>();
-        params.put("pageSize","10");
-        params.put("curPage",pageIndex.toString());
-        params.put("categoryId", String.valueOf(categoryId));
-        httpHelper.post(Contants.API.WARES_LIST, params, new SpotsCallBack<Page<Wares>>(getContext()) {
-
-            @Override
-            public void onSuccess(Response response, Page<Wares> waresPage) {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-                if (pageIndex == 1){
-                    waresAdapter.clear();
-                    refreshLayout.resetNoMoreData();
-                }
-                if (waresPage.getList().size() < 10){
-                    refreshLayout.finishLoadMoreWithNoMoreData();
-                }
-                waresAdapter.addData(waresPage.getList());
-                pageIndex++;
-            }
-            @Override
-            public void onResponse(Response response) {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-            }
-
-            @Override
-            public void onError(Response response, Exception e) {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-            }
-        });
-
+        pager.putParam("categoryId",categoryId);
+        pager.refresh();
     }
 
     private void initView() {
@@ -148,7 +125,6 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 currentCategory = categoryAdapter.getItem(position);
-                pageIndex = 1;
                 getWaresData(currentCategory.getId());
             }
         });
@@ -158,21 +134,6 @@ public class CategoryFragment extends Fragment {
         recyclerview_wares.setAdapter(waresAdapter);
 
         refreshLayout = rootView.findViewById(R.id.refreshLayout);
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                pageIndex = 1;
-                getWaresData(currentCategory.getId());
-            }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                getWaresData(currentCategory.getId());
-            }
-        });
-
-
     }
     private void initSlider() {
 
@@ -187,4 +148,11 @@ public class CategoryFragment extends Fragment {
 
     }
 
+    @Override
+    public void refreshData(Page page) {
+        if (page.getCurrentPage() == 1) {
+            waresAdapter.clear();
+        }
+        waresAdapter.addData(page.getList());
+    }
 }

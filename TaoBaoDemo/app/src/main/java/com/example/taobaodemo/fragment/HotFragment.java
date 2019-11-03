@@ -19,96 +19,68 @@ import com.example.taobaodemo.bean.hot.Page;
 import com.example.taobaodemo.bean.hot.Wares;
 import com.example.taobaodemo.http.OkHttpHelper;
 import com.example.taobaodemo.http.SpotsCallBack;
+import com.example.taobaodemo.utils.Pager;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import kotlin.reflect.TypeOfKt;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotFragment extends Fragment {
+public class HotFragment extends Fragment implements Pager.OnPageListener {
 
 
     private View rootView;
     private RecyclerView mRecyclerView;
     private HotWaresAdapter mAdapter;
-    RefreshLayout refreshLayout;
+    private RefreshLayout refreshLayout;
 
-    private Integer pageIndex = 1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_hot, container, false);
-        pageIndex = 1;
         initView();
         initData();
         return rootView;
     }
 
     private void initData() {
-        Map<String, String> params = new HashMap<>();
-        params.put("pageSize","10");
-        params.put("curPage",pageIndex.toString());
-        OkHttpHelper.getInstance().post(Contants.API.WARES_HOT, params, new SpotsCallBack<Page<Wares>>(getContext()) {
-            @Override
-            public void onSuccess(Response response, Page<Wares> page) {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
 
-                if (pageIndex == 1){
-                    mAdapter.clear();
-                    refreshLayout.resetNoMoreData();
-                }
-                if (page.getList().size() < 10){
-                    refreshLayout.finishLoadMoreWithNoMoreData();
-                }
-                mAdapter.addData(page.getList());
-                pageIndex++;
-            }
-
-            @Override
-            public void onResponse(Response response) {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-            }
-
-            @Override
-            public void onError(Response response, Exception e) {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-            }
-        });
+        Pager pager = Pager.newBuilder()
+                .setUrl(Contants.API.WARES_HOT)
+                .setRefreshLayout(refreshLayout)
+                .setOnPageListener(this)
+                .build(getContext(), new TypeToken<Page<Wares>>(){}.getType());
+        pager.refresh();
     }
 
-    private void initView(){
+    private void initView() {
         mRecyclerView = rootView.findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new HotWaresAdapter(getContext(),null);
+        mAdapter = new HotWaresAdapter(getContext(), null);
         mRecyclerView.setAdapter(mAdapter);
         //添加Android自带的分割线
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         refreshLayout = rootView.findViewById(R.id.refreshLayout);
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                pageIndex = 1;
-                initData();
-            }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                initData();
-            }
-        });
     }
 
+
+    @Override
+    public void refreshData(Page page) {
+
+        if (page.getCurrentPage() == 1) {
+            mAdapter.clear();
+        }
+        mAdapter.addData(page.getList());
+    }
 }
