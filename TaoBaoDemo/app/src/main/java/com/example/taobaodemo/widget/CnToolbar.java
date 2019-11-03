@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -25,7 +26,7 @@ public class CnToolbar extends Toolbar {
     private View mView;
     private TextView mTextView;
     private EditText mSearchView;
-    private ImageButton mRightImageButton;
+    private Button mRightImageButton;
 
     public CnToolbar(Context context) {
         this(context, null);
@@ -58,6 +59,11 @@ public class CnToolbar extends Toolbar {
                 showSearchView();
                 hideTitleView();
             }
+
+            String rightBtnTitle = a.getString(R.styleable.CnToolbar_rightButtonText);
+            if (rightBtnTitle != null){
+                setRightButtonTitle(rightBtnTitle);
+            }
             a.recycle();
         }
 
@@ -80,7 +86,13 @@ public class CnToolbar extends Toolbar {
 
     public void setRightButtonIcon(Drawable icon) {
         if (mRightImageButton != null) {
-            mRightImageButton.setImageDrawable(icon);
+            mRightImageButton.setBackground(icon);
+            mRightImageButton.setVisibility(VISIBLE);
+        }
+    }
+    public void setRightButtonTitle(String str) {
+        if (mRightImageButton != null) {
+            mRightImageButton.setText(str);
             mRightImageButton.setVisibility(VISIBLE);
         }
     }
