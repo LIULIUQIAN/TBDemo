@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -126,7 +125,7 @@ public class WareListActivity extends AppCompatActivity implements Pager.OnPageL
                     mRecyclerview.setLayoutManager(new LinearLayoutManager(WareListActivity.this));
                 }else {
                     mAdapter.resetLayout(R.layout.template_grid_wares);
-                    mRecyclerview.setLayoutManager(new GridLayoutManager(WareListActivity.this,2));
+                    mRecyclerview.setLayoutManager(new GridLayoutManager(WareListActivity.this,3));
                 }
 
                 mRecyclerview.setAdapter(mAdapter);
