@@ -40,8 +40,7 @@
                     android:id="@+id/imgview_big"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_big_0" />
+                    android:layout_weight="1" />
 
                 <View style="@style/line_horizontal" />
 
@@ -55,8 +54,7 @@
                         android:id="@+id/imgview_small_top"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/img_0_small1" />
+                        android:layout_weight="1" />
 
                     <View style="@style/line_vertical" />
 
@@ -64,8 +62,7 @@
                         android:id="@+id/imgview_small_bottom"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/img_0_small2" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
