@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.taobaodemo.R;
 import com.example.taobaodemo.adapter.CartAdapter;
@@ -23,6 +26,12 @@ public class CartFragment extends Fragment {
 
     private View rootView;
     private RecyclerView mRecyclerView;
+    private CheckBox mCheckBox;
+    private TextView mTextTotal;
+    private Button mBtnOrder;
+    private Button mBtnDel;
+
+
     private CartAdapter cartAdapter;
     private CartProvider cartProvider;
 
@@ -37,14 +46,18 @@ public class CartFragment extends Fragment {
 
     private void initView() {
         mRecyclerView = rootView.findViewById(R.id.cart_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-        cartAdapter = new CartAdapter(getContext(),null);
-        mRecyclerView.setAdapter(cartAdapter);
+        mCheckBox = rootView.findViewById(R.id.checkbox_all);
+        mTextTotal = rootView.findViewById(R.id.txt_total);
+        mBtnOrder = rootView.findViewById(R.id.btn_order);
+        mBtnDel = rootView.findViewById(R.id.btn_del);
 
         cartProvider = new CartProvider(getContext());
-        cartAdapter.clear();
-        cartAdapter.addData(cartProvider.getAll());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        cartAdapter = new CartAdapter(getContext(),cartProvider.getAll(),mCheckBox,mTextTotal);
+        mRecyclerView.setAdapter(cartAdapter);
+
+
 
     }
 
