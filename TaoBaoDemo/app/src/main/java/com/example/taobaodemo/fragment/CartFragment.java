@@ -23,7 +23,7 @@ import com.example.taobaodemo.widget.CnToolbar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
     private RecyclerView mRecyclerView;
@@ -56,20 +56,25 @@ public class CartFragment extends Fragment {
 
         cartProvider = new CartProvider(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-        cartAdapter = new CartAdapter(getContext(),cartProvider.getAll(),mCheckBox,mTextTotal);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        cartAdapter = new CartAdapter(getContext(), cartProvider.getAll(), mCheckBox, mTextTotal);
         mRecyclerView.setAdapter(cartAdapter);
 
-        mToolbar.setRightButtonOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isEditState = !isEditState;
-                mToolbar.setRightButtonTitle(isEditState ? "完成":"编辑");
-                mBtnOrder.setVisibility(isEditState?View.GONE:View.VISIBLE);
-                mBtnDel.setVisibility(isEditState?View.VISIBLE:View.GONE);
-            }
-        });
+        mToolbar.setRightButtonOnClickListener(this);
+        mBtnDel.setOnClickListener(this);
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == R.id.toolbar_rightButton) {
+            isEditState = !isEditState;
+            mToolbar.setRightButtonTitle(isEditState ? "完成" : "编辑");
+            mBtnOrder.setVisibility(isEditState ? View.GONE : View.VISIBLE);
+            mBtnDel.setVisibility(isEditState ? View.VISIBLE : View.GONE);
+        } else if (v.getId() == R.id.btn_del) {
+            cartAdapter.delCart();
+        }
+    }
 }

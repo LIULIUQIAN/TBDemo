@@ -14,6 +14,7 @@ import com.example.taobaodemo.utils.CartProvider;
 import com.example.taobaodemo.widget.NumberAddSubView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CartAdapter extends SimpleAdapter<ShoppingCart> implements BaseAdapter.OnItemClickListener {
@@ -95,5 +96,26 @@ public class CartAdapter extends SimpleAdapter<ShoppingCart> implements BaseAdap
         }
         textView.setText(Html.fromHtml("合计 <span style='color:#eb4f38'>￥" + sum + "</span>"), TextView.BufferType.SPANNABLE);
         this.checkBox.setChecked(checkedCount == datas.size());
+    }
+
+    public void delCart(){
+
+        if (datas != null && datas.size() > 0) {
+
+            for(Iterator iterator = datas.iterator(); iterator.hasNext();){
+
+                ShoppingCart cart = (ShoppingCart) iterator.next();
+                if(cart.isChecked()){
+                    int position = datas.indexOf(cart);
+                    cartProvider.delete(cart);
+                    iterator.remove();
+                    notifyItemRemoved(position);
+                }
+
+            }
+        }
+
+
+
     }
 }
