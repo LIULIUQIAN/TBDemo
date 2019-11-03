@@ -12,5 +12,7 @@ public class Contants {
 
         public static final String CATEGORY_LIST=BASE_URL +"course_api/category/list";
         public static final String WARES_LIST=BASE_URL +"course_api/wares/list";
+
+        public static final String WARES_CAMPAIN_LIST=BASE_URL +"course_api/wares/campaign/list";
     }
 }

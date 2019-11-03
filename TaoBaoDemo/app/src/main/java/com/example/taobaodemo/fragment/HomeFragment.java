@@ -1,6 +1,7 @@
 package com.example.taobaodemo.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,8 +18,10 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.example.taobaodemo.Contants;
 import com.example.taobaodemo.R;
+import com.example.taobaodemo.WareListActivity;
 import com.example.taobaodemo.adapter.HomeCatgoryAdapter;
 import com.example.taobaodemo.bean.home.Banner;
+import com.example.taobaodemo.bean.home.Campaign;
 import com.example.taobaodemo.bean.home.HomeCampaign;
 import com.example.taobaodemo.http.OkHttpHelper;
 import com.example.taobaodemo.http.SpotsCallBack;
@@ -84,6 +87,16 @@ public class HomeFragment extends Fragment {
                 adapter = new HomeCatgoryAdapter(getContext(), homeCampaigns);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                adapter.setOnCampaignClickListener(new HomeCatgoryAdapter.OnCampaignClickListener() {
+                    @Override
+                    public void onClick(View view, Campaign campaign) {
+
+                        Intent intent = new Intent(getActivity(),WareListActivity.class);
+                        intent.putExtra(WareListActivity.COMPAINGAIN_ID,campaign.getId());
+                        startActivity(intent);
+                    }
+                });
             }
         });
 

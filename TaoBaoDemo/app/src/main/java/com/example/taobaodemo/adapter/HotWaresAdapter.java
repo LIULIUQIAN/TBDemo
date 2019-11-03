@@ -36,12 +36,20 @@ public class HotWaresAdapter extends SimpleAdapter<Wares> {
         text_title.setText(item.getName());
         text_price.setText(item.getPrice().toString());
 
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cartProvider.put(item);
-                Toast.makeText(context,"已添加购物车",Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (btn_add != null){
+            btn_add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartProvider.put(item);
+                    Toast.makeText(context,"已添加购物车",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    public void resetLayout(int layoutId){
+        this.layoutResId = layoutId;
+        notifyDataSetChanged();
     }
 }

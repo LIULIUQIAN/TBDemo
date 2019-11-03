@@ -90,6 +90,10 @@ public class CnToolbar extends Toolbar {
             mRightImageButton.setVisibility(VISIBLE);
         }
     }
+    public void  setRightButtonIcon(int icon){
+
+        setRightButtonIcon(getResources().getDrawable(icon));
+    }
     public void setRightButtonTitle(String str) {
         if (mRightImageButton != null) {
             mRightImageButton.setText(str);
