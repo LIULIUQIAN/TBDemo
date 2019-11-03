@@ -110,6 +110,7 @@ public class CartAdapter extends SimpleAdapter<ShoppingCart> implements BaseAdap
                     cartProvider.delete(cart);
                     iterator.remove();
                     notifyItemRemoved(position);
+                    showTotalPrice();
                 }
 
             }

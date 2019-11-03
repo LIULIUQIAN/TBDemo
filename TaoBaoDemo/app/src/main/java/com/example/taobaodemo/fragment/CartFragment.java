@@ -73,6 +73,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             mToolbar.setRightButtonTitle(isEditState ? "完成" : "编辑");
             mBtnOrder.setVisibility(isEditState ? View.GONE : View.VISIBLE);
             mBtnDel.setVisibility(isEditState ? View.VISIBLE : View.GONE);
+            mTextTotal.setVisibility(isEditState ? View.GONE : View.VISIBLE);
         } else if (v.getId() == R.id.btn_del) {
             cartAdapter.delCart();
         }
