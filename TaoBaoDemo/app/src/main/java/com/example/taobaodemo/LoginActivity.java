@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.taobaodemo.application.TBApplication;
 import com.example.taobaodemo.bean.User;
 import com.example.taobaodemo.http.OkHttpHelper;
 import com.example.taobaodemo.http.SpotsCallBack;
@@ -93,6 +94,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
 
+                TBApplication application = TBApplication.getInstance();
+                application.putUser(userLoginRespMsg.getData(),userLoginRespMsg.getToken());
                 finish();
             }
         });
