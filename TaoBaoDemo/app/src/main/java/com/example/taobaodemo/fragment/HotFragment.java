@@ -1,6 +1,7 @@
 package com.example.taobaodemo.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.example.taobaodemo.Contants;
 import com.example.taobaodemo.R;
+import com.example.taobaodemo.WareDetailActivity;
+import com.example.taobaodemo.adapter.BaseAdapter;
 import com.example.taobaodemo.adapter.HotWaresAdapter;
 import com.example.taobaodemo.bean.hot.Page;
 import com.example.taobaodemo.bean.hot.Wares;
@@ -72,6 +75,17 @@ public class HotFragment extends Fragment implements Pager.OnPageListener {
         //添加Android自带的分割线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         refreshLayout = rootView.findViewById(R.id.refreshLayout);
+
+        mAdapter.setmOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Wares wares = mAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), WareDetailActivity.class);
+                intent.putExtra(WareDetailActivity.WARES_KEY,wares);
+                startActivity(intent);
+            }
+        });
     }
 
 

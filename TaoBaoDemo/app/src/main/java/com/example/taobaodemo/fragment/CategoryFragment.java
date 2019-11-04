@@ -1,6 +1,7 @@
 package com.example.taobaodemo.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.example.taobaodemo.Contants;
 import com.example.taobaodemo.R;
+import com.example.taobaodemo.WareDetailActivity;
 import com.example.taobaodemo.adapter.BaseAdapter;
 import com.example.taobaodemo.adapter.CategoryAdapter;
 import com.example.taobaodemo.adapter.RecyclerviewWaresAdapter;
@@ -132,8 +134,17 @@ public class CategoryFragment extends Fragment implements Pager.OnPageListener {
         recyclerview_wares.setLayoutManager(new GridLayoutManager(getContext(),2));
         waresAdapter = new RecyclerviewWaresAdapter(getContext(),null);
         recyclerview_wares.setAdapter(waresAdapter);
-
         refreshLayout = rootView.findViewById(R.id.refreshLayout);
+
+        waresAdapter.setmOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Wares wares = waresAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), WareDetailActivity.class);
+                intent.putExtra(WareDetailActivity.WARES_KEY,wares);
+                startActivity(intent);
+            }
+        });
     }
     private void initSlider() {
 
