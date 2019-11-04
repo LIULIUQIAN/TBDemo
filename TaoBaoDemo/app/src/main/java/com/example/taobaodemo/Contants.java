@@ -2,6 +2,8 @@ package com.example.taobaodemo;
 
 public class Contants {
 
+    public  static final String DES_KEY="Cniao5_123456";
+
     public static class API{
         public static final String BASE_URL = "http://112.124.22.238:8081/";
 
@@ -15,5 +17,7 @@ public class Contants {
 
         public static final String WARES_CAMPAIN_LIST=BASE_URL +"course_api/wares/campaign/list";
         public static final String WARES_DETAIL=BASE_URL +"course_api/wares/detail.html";
+
+        public static final String LOGIN=BASE_URL +"course_api/auth/login";
     }
 }

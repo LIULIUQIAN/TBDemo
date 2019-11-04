@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WareDetailActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".WareDetailActivity" />
         <activity android:name=".WareListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -22,19 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
             android:noHistory="true">
             <intent-filter>
-                <data
-                    android:scheme="tencent100371282" />
-                <action
-                    android:name="android.intent.action.VIEW" />
-                <category
-                    android:name="android.intent.category.DEFAULT" />
-                <category
-                    android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent100371282" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
     </application>

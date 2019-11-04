@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.taobaodemo.widget.CnToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:title="登录"
+        android:navigationIcon="@drawable/icon_back_32px"/>
+
+
+    <EditText
+        android:id="@+id/etxt_phone"
+        style="@style/editText_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:drawableLeft="@drawable/icon_telphone_32"
+        android:drawablePadding="20dp"
+        android:hint="请输入手机号码"
+        android:inputType="phone"
+        android:layout_marginHorizontal="10dp"/>
+
+    <View style="@style/line_vertical" />
+
+    <EditText
+        android:id="@+id/etxt_pwd"
+        style="@style/editText_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_lock"
+        android:drawablePadding="20dp"
+        android:hint="请输入手机号码"
+        android:inputType="textPassword"
+        android:layout_marginHorizontal="10dp"/>
+
+    <View style="@style/line_vertical" />
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/bigRedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:text="登录" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="注册账号"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="忘记密码"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
