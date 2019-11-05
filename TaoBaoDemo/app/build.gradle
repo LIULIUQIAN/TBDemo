@@ -38,6 +38,7 @@ MobSDK {
             }
         }
     }
+    SMSSDK {}
 }
 
 android {

@@ -3,6 +3,7 @@ package com.example.taobaodemo;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView etxtPhone;
     private TextView etxtPwd;
     private Button btnLogin;
+    private TextView regUser;
 
     OkHttpHelper okHttpHelper = OkHttpHelper.getInstance();
 
@@ -51,7 +53,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etxtPhone = findViewById(R.id.etxt_phone);
         etxtPwd = findViewById(R.id.etxt_pwd);
         btnLogin = findViewById(R.id.btn_login);
+        regUser = findViewById(R.id.reg_user);
         btnLogin.setOnClickListener(this);
+        regUser.setOnClickListener(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +70,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v.getId() == R.id.btn_login){
             login();
+        }else if(v.getId() == R.id.reg_user){
+            startActivity(new Intent(this,RegActivity.class));
         }
     }
 
