@@ -11,7 +11,7 @@ public class TBApplication extends Application {
 
     private User user;
     private static TBApplication mInstance;
-private Intent mIntent;
+    private Intent mIntent;
 
     @Override
     public void onCreate() {
@@ -20,31 +20,31 @@ private Intent mIntent;
         initUser();
     }
 
-    public static TBApplication getInstance(){
+    public static TBApplication getInstance() {
         return mInstance;
     }
 
-    private void initUser(){
+    private void initUser() {
         this.user = UserLocalData.getUser(this);
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 
-    public void putUser(User user,String token){
+    public void putUser(User user, String token) {
         this.user = user;
-        UserLocalData.putUser(this,user);
-        UserLocalData.putToken(this,token);
+        UserLocalData.putUser(this, user);
+        UserLocalData.putToken(this, token);
     }
 
-    public void clearUser(){
+    public void clearUser() {
         this.user = null;
         UserLocalData.clearUser(this);
         UserLocalData.clearToken(this);
     }
 
-    public String getToken(){
+    public String getToken() {
         return UserLocalData.getToken(this);
     }
 
@@ -56,7 +56,7 @@ private Intent mIntent;
         this.mIntent = mIntent;
     }
 
-    public void jumpToTargetActivity(Context context){
+    public void jumpToTargetActivity(Context context) {
         context.startActivity(mIntent);
         mIntent = null;
     }

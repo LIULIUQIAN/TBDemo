@@ -2,6 +2,7 @@ package com.example.taobaodemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -97,16 +98,16 @@ public class RegActivity extends AppCompatActivity {
         public void afterEvent(int event, int result, Object data) {
 
             if (result == SMSSDK.RESULT_COMPLETE) {
-                //回调完成
-                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    //提交验证码成功
-                    System.out.println("提交验证码成功");
-                }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                     //获取验证码成功
                     System.out.println("获取验证码成功");
-                }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
-                    //返回支持发送验证码的国家列表
-                    System.out.println("返回支持发送验证码的国家列表");
+                    String phone = etxtPhone.getText().toString().trim();
+                    String pwd = etxtPwd.getText().toString().trim();
+                    Intent intent = new Intent(RegActivity.this,RegSecondActivity.class);
+                    intent.putExtra(RegSecondActivity.PHONE_KEY,phone);
+                    intent.putExtra(RegSecondActivity.PWD_KEY,pwd);
+                    startActivity(intent);
+                    finish();
                 }
             }else{
                 // 根据服务器返回的网络错误，给toast提示
@@ -116,9 +117,14 @@ public class RegActivity extends AppCompatActivity {
 
                     JSONObject object = new JSONObject(throwable.getMessage());
 
-                    String des = object.optString("detail");
+                    final String des = object.optString("detail");
                     if (!TextUtils.isEmpty(des)) {
-                       Toast.makeText(RegActivity.this,des,Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegActivity.this,des,Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 } catch (Exception e) {
                     SMSLog.getInstance().w(e);
