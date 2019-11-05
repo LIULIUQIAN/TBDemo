@@ -93,41 +93,7 @@ public class CartFragment extends BaseFragment implements View.OnClickListener {
         } else if (v.getId() == R.id.btn_del) {
             cartAdapter.delCart();
         } else if (v.getId() == R.id.btn_order) {
-
-//            OkHttpHelper httpHelper = OkHttpHelper.getInstance();
-//            httpHelper.post(Contants.API.USER_DETAIL, null, new SpotsCallBack<String>(getContext()) {
-//
-//                @Override
-//                public void onSuccess(Response response, String s) {
-//                    System.out.println("返回结果" + s);
-//                }
-//            });
-//            super.startActivity(new Intent(getActivity(), CreateOrderActivity.class),true);
-
-
-            RegisterPage page = new RegisterPage();
-            //如果使用我们的ui，没有申请模板编号的情况下需传null
-            page.setTempCode(null);
-            page.setRegisterCallback(new EventHandler() {
-                public void afterEvent(int event, int result, Object data) {
-                    if (result == SMSSDK.RESULT_COMPLETE) {
-                        // 处理成功的结果
-                        HashMap<String,Object> phoneMap = (HashMap<String, Object>) data;
-                        // 国家代码，如“86”
-                        String country = (String) phoneMap.get("country");
-                        // 手机号码，如“13800138000”
-                        String phone = (String) phoneMap.get("phone");
-                        // TODO 利用国家代码和手机号码进行后续的操作
-                        System.out.println("利用国家代码和手机号码进行后续的操作="+country+phone);
-                    } else{
-                        // TODO 处理错误的结果
-
-                        System.out.println("处理错误的结果");
-                    }
-                }
-            });
-            page.show(getContext());
-
+            startActivity(new Intent(getActivity(), CreateOrderActivity.class), true);
         }
     }
 }
