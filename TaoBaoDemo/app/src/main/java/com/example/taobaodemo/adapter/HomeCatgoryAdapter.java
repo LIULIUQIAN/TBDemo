@@ -58,6 +58,9 @@ public class HomeCatgoryAdapter extends RecyclerView.Adapter<HomeCatgoryAdapter.
 
     @Override
     public int getItemCount() {
+        if (mDatas == null){
+            return 0;
+        }
         return mDatas.size();
     }
 

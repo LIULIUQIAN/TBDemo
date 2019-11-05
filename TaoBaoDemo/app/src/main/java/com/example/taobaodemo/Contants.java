@@ -19,5 +19,7 @@ public class Contants {
         public static final String WARES_DETAIL=BASE_URL +"course_api/wares/detail.html";
 
         public static final String LOGIN=BASE_URL +"course_api/auth/login";
+
+        public static final String USER_DETAIL=BASE_URL +"course_api/user/get?id=1";
     }
 }

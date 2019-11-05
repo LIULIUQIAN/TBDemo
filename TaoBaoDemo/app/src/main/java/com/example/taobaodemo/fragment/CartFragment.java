@@ -1,6 +1,7 @@
 package com.example.taobaodemo.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,15 +16,24 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.example.taobaodemo.Contants;
+import com.example.taobaodemo.CreateOrderActivity;
 import com.example.taobaodemo.R;
 import com.example.taobaodemo.adapter.CartAdapter;
+import com.example.taobaodemo.bean.User;
+import com.example.taobaodemo.http.BaseCallback;
+import com.example.taobaodemo.http.OkHttpHelper;
+import com.example.taobaodemo.http.SpotsCallBack;
 import com.example.taobaodemo.utils.CartProvider;
 import com.example.taobaodemo.widget.CnToolbar;
+
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements View.OnClickListener {
+public class CartFragment extends BaseFragment implements View.OnClickListener {
 
     private View rootView;
     private RecyclerView mRecyclerView;
@@ -62,6 +72,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
         mToolbar.setRightButtonOnClickListener(this);
         mBtnDel.setOnClickListener(this);
+        mBtnOrder.setOnClickListener(this);
 
     }
 
@@ -76,6 +87,18 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             mTextTotal.setVisibility(isEditState ? View.GONE : View.VISIBLE);
         } else if (v.getId() == R.id.btn_del) {
             cartAdapter.delCart();
+        } else if (v.getId() == R.id.btn_order) {
+
+//            OkHttpHelper httpHelper = OkHttpHelper.getInstance();
+//            httpHelper.post(Contants.API.USER_DETAIL, null, new SpotsCallBack<String>(getContext()) {
+//
+//                @Override
+//                public void onSuccess(Response response, String s) {
+//                    System.out.println("返回结果" + s);
+//                }
+//            });
+//            super.startActivity(new Intent(getActivity(), CreateOrderActivity.class),true);
+
         }
     }
 }

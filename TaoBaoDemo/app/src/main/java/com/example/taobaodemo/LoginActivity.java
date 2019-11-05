@@ -96,6 +96,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 TBApplication application = TBApplication.getInstance();
                 application.putUser(userLoginRespMsg.getData(),userLoginRespMsg.getToken());
+
+                if (application.getIntent() != null){
+                    application.jumpToTargetActivity(LoginActivity.this);
+                }
+
                 finish();
             }
         });

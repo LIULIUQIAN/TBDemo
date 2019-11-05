@@ -2,7 +2,9 @@ package com.example.taobaodemo.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
+import com.example.taobaodemo.application.TBApplication;
 import com.google.gson.Gson;
 
 
@@ -23,6 +25,9 @@ import okhttp3.Response;
 public class OkHttpHelper {
 
     public static final String TAG = "OkHttpHelper";
+    public static final int TOKEN_MISSING=401;// token 丢失
+    public static final int TOKEN_ERROR=402; // token 错误
+    public static final int TOKEN_EXPIRE=403; // token 过期
 
     private static OkHttpHelper mInstance;
     private OkHttpClient mHttpClient;
@@ -103,7 +108,9 @@ public class OkHttpHelper {
                                 }
                             }
 
-                        } else {
+                        }else if (response.code() == TOKEN_MISSING || response.code() == TOKEN_ERROR || response.code() == TOKEN_EXPIRE){
+                            callback.onTokenError(response,response.code());
+                        }else {
                             callback.onError(response, null);
                         }
                     }
@@ -131,6 +138,11 @@ public class OkHttpHelper {
             for (Map.Entry<String, Object> entry : param.entrySet()) {
                 body.add(entry.getKey(), entry.getValue().toString());
             }
+        }
+
+        String token = TBApplication.getInstance().getToken();
+        if (!TextUtils.isEmpty(token)){
+            body.add("token",token);
         }
         return body.build();
     }
