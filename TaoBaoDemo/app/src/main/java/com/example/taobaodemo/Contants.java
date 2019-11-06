@@ -25,5 +25,8 @@ public class Contants {
 
         public static final String ORDER_CREATE=BASE_URL +"course_api/order/create";
         public static final String ORDER_COMPLEPE=BASE_URL +"/order/complete";
+
+        public static final String PAY_URL = "http://218.244.151.190/demo/charge";
+
     }
 }
