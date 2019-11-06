@@ -18,11 +18,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -91,11 +92,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_marginTop="10dp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                     android:background="@drawable/selector_list_item"
                     android:clickable="true"
                     android:focusable="true"
-                    android:paddingVertical="5dp"
+                    android:paddingVertical="10dp"
                     android:tag="alipay">
 
                     <ImageView
@@ -169,6 +169,109 @@
 
                 <View style="@style/line_vertical" />
 
+                <RelativeLayout
+                    android:id="@+id/rl_wechat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_list_item"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingVertical="10dp"
+                    android:tag="alipay">
+
+                    <ImageView
+                        android:id="@+id/icon_wechat"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_wechat_72" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/icon_wechat"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="微信支付"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="微信支付方便快捷"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:id="@+id/rb_webchat"
+                        style="@style/radioButton"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <View style="@style/line_vertical" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_bd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_list_item"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingVertical="10dp"
+                    android:tag="alipay">
+
+                    <ImageView
+                        android:id="@+id/icon_bd"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_bd_72" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/icon_bd"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="百度钱包"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="百度钱包支付方便快捷"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:id="@+id/rb_bd"
+                        style="@style/radioButton"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <View style="@style/line_vertical" />
 
             </LinearLayout>
 
@@ -177,5 +280,29 @@
 
     </ScrollView>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#90000000"
+        android:padding="@dimen/largePadding">
+
+        <TextView
+            android:id="@+id/txt_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="总计：￥0.00"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_createOrder"
+            style="@style/bigRedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="提交订单" />
+
+    </LinearLayout>
 
 </LinearLayout>
