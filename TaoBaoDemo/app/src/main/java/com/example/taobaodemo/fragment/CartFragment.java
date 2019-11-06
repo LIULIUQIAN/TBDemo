@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.taobaodemo.Contants;
 import com.example.taobaodemo.CreateOrderActivity;
@@ -93,6 +94,10 @@ public class CartFragment extends BaseFragment implements View.OnClickListener {
         } else if (v.getId() == R.id.btn_del) {
             cartAdapter.delCart();
         } else if (v.getId() == R.id.btn_order) {
+            if (cartProvider.getOrderAll().size() < 1){
+                Toast.makeText(getContext(),"请选择要购买的商品",Toast.LENGTH_SHORT).show();
+                return;
+            }
             startActivity(new Intent(getActivity(), CreateOrderActivity.class), true);
         }
     }

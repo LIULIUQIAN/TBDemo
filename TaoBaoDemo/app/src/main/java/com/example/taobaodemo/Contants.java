@@ -22,5 +22,8 @@ public class Contants {
         public static final String REG=BASE_URL +"course_api/auth/reg";
 
         public static final String USER_DETAIL=BASE_URL +"course_api/user/get?id=1";
+
+        public static final String ORDER_CREATE=BASE_URL +"course_api/order/create";
+        public static final String ORDER_COMPLEPE=BASE_URL +"/order/complete";
     }
 }

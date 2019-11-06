@@ -64,6 +64,25 @@ public class CartProvider {
         return getDataFromLocal();
     }
 
+    public List<ShoppingCart> getOrderAll() {
+
+        String json = PreferencesUtils.getString(mContext, CART_JSON);
+        List<ShoppingCart> carts = new ArrayList<>();
+        if (json != null) {
+            carts = gson.fromJson(json, new TypeToken<List<ShoppingCart>>() {
+            }.getType());
+        }
+        List<ShoppingCart> orderCarts = new ArrayList<>();
+        for (ShoppingCart cart : carts) {
+
+            if (cart.isChecked()) {
+                orderCarts.add(cart);
+            }
+        }
+
+        return orderCarts;
+    }
+
     public void commit() {
 
         int size = datas.size();

@@ -38,13 +38,13 @@ public class CartAdapter extends SimpleAdapter<ShoppingCart> implements BaseAdap
                 if (datas != null && datas.size() > 0) {
                     for (ShoppingCart cart : datas) {
                         cart.setChecked(checkBox.isChecked());
+                        cartProvider.update(cart);
                     }
                     notifyDataSetChanged();
                     showTotalPrice();
                 }
             }
         });
-
 
     }
 
