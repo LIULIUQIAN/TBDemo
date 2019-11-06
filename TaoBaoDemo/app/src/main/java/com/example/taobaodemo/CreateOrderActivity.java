@@ -312,15 +312,23 @@ public class CreateOrderActivity extends AppCompatActivity implements View.OnCli
             if (resultCode == Activity.RESULT_OK) {
                 String result = data.getExtras().getString("pay_result");
 
+                Intent resultIntent = new Intent(CreateOrderActivity.this,PayResultActivity.class);
+
                 if (TextUtils.equals(result,"success")){
-                    Toast.makeText(this,"支付成功",Toast.LENGTH_SHORT).show();
+                    resultIntent.putExtra(PayResultActivity.TITLE_KEY,"支付成功");
+                    resultIntent.putExtra(PayResultActivity.STATE_KEY,true);
                 }else if (TextUtils.equals(result,"fail")){
-                    Toast.makeText(this,"支付失败",Toast.LENGTH_SHORT).show();
+                    resultIntent.putExtra(PayResultActivity.TITLE_KEY,"支付失败");
+                    resultIntent.putExtra(PayResultActivity.STATE_KEY,false);
                 }else if (TextUtils.equals(result,"cancel")){
-                    Toast.makeText(this,"支付取消",Toast.LENGTH_SHORT).show();
+                    resultIntent.putExtra(PayResultActivity.TITLE_KEY,"支付取消");
+                    resultIntent.putExtra(PayResultActivity.STATE_KEY,false);
                 }else if (TextUtils.equals(result,"invalid")){
-                    Toast.makeText(this,"付款APP未安装",Toast.LENGTH_SHORT).show();
+                    resultIntent.putExtra(PayResultActivity.TITLE_KEY,"付款APP未安装");
+                    resultIntent.putExtra(PayResultActivity.STATE_KEY,false);
                 }
+                startActivity(resultIntent);
+                finish();
 
             }
         }
