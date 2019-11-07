@@ -144,6 +144,11 @@ public class WareDetailActivity extends AppCompatActivity {
 
         @JavascriptInterface
         public void buy(long id){
+            Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void addToCart(long id){
             Toast.makeText(context,"已添加购物车",Toast.LENGTH_SHORT).show();
             cartProvider.put(wares);
         }
