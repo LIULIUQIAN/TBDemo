@@ -29,7 +29,7 @@ public class AddressData {
     public void put(Address address) {
         Address temp = datas.get(address.getId().intValue());
         if (temp == null) {
-            temp = temp;
+            temp = address;
         } else {
             temp.setConsignee(address.getConsignee());
             temp.setPhone(address.getPhone());
