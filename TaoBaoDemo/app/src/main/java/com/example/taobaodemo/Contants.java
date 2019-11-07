@@ -28,5 +28,9 @@ public class Contants {
 
         public static final String PAY_URL = "http://218.244.151.190/demo/charge";
 
+        public static final String ADDRESS_LIST=BASE_URL +"course_api/addr/list";
+        public static final String ADDRESS_CREATE=BASE_URL +"course_api/addr/create";
+        public static final String ADDRESS_UPDATE=BASE_URL +"course_api/addr/update";
+
     }
 }

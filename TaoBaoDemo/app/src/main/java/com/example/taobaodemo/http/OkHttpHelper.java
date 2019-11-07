@@ -3,6 +3,7 @@ package com.example.taobaodemo.http;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.example.taobaodemo.application.TBApplication;
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ public class OkHttpHelper {
     public static final int TOKEN_MISSING=401;// token 丢失
     public static final int TOKEN_ERROR=402; // token 错误
     public static final int TOKEN_EXPIRE=403; // token 过期
+    public static final int ON_PERMISSIONS=405; // token 过期
 
     private static OkHttpHelper mInstance;
     private OkHttpClient mHttpClient;
@@ -110,7 +112,10 @@ public class OkHttpHelper {
 
                         }else if (response.code() == TOKEN_MISSING || response.code() == TOKEN_ERROR || response.code() == TOKEN_EXPIRE){
                             callback.onTokenError(response,response.code());
-                        }else {
+                        }else if (response.code() == ON_PERMISSIONS){
+                            Toast.makeText(TBApplication.getInstance(),"无权限访问",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
                             callback.onError(response, null);
                         }
                     }

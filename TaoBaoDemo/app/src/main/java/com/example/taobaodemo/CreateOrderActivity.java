@@ -198,7 +198,7 @@ public class CreateOrderActivity extends AppCompatActivity implements View.OnCli
 //            public void onSuccess(Response response, CreateOrderRespMsg createOrderRespMsg) {
 //                btn_createOrder.setEnabled(true);
 //
-//                System.out.println("订单创建结果 ===" + createOrderRespMsg.toString());
+//                System.out.println("订单创建结果 ===" + createOrderRespMsg.getMessage());
 //            }
 //
 //            @Override

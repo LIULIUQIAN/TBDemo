@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PayResultActivity"></activity>
+        <activity android:name=".AddressListActivity"></activity>
+        <activity android:name=".PayResultActivity" />
         <activity android:name=".RegSecondActivity" />
         <activity android:name=".RegActivity" />
         <activity android:name=".CreateOrderActivity" />

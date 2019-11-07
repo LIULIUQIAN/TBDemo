@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.taobaodemo.AddressListActivity;
 import com.example.taobaodemo.LoginActivity;
 import com.example.taobaodemo.R;
 import com.example.taobaodemo.application.TBApplication;
@@ -24,12 +25,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MineFragment extends Fragment implements View.OnClickListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private View rootView;
     private CircleImageView imgHead;
     private TextView txtUsername;
     private Button btnLogout;
+    private TextView txtMyAddress;
 
     TBApplication application = TBApplication.getInstance();
 
@@ -46,10 +48,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         imgHead = rootView.findViewById(R.id.img_head);
         txtUsername = rootView.findViewById(R.id.txt_username);
         btnLogout = rootView.findViewById(R.id.btn_logout);
+        txtMyAddress = rootView.findViewById(R.id.txt_my_address);
 
         imgHead.setOnClickListener(this);
         txtUsername.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
+        txtMyAddress.setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +70,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_logout:
                 application.clearUser();
                 setUserInfo();
+                break;
+            case R.id.txt_my_address:
+                Intent intent = new Intent(getActivity(), AddressListActivity.class);
+                startActivity(intent,true);
                 break;
         }
 
