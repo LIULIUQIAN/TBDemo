@@ -13,7 +13,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:navigationIcon="@drawable/icon_back_32px"
-        android:title="收件地址" />
+        android:title="收件地址"
+        app:rightButtonIcon="@drawable/icon_add"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

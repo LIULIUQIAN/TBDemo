@@ -9,17 +9,19 @@ public class Address implements Serializable {
     private String consignee;
     private String phone;
     private String addr;
-    private String zipCode;
+    private String detailed;
     private Boolean isDefault;
 
     public Address() {
     }
 
-    public Address(String consignee, String phone, String addr, String zipCode) {
+    public Address(String consignee, String phone, String addr, String detailed) {
         this.consignee = consignee;
         this.phone = phone;
         this.addr = addr;
-        this.zipCode = zipCode;
+        this.detailed = detailed;
+        this.isDefault = false;
+        this.id = System.currentTimeMillis();
     }
 
     public Long getId() {
@@ -54,13 +56,6 @@ public class Address implements Serializable {
         this.addr = addr;
     }
 
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
 
     public Boolean getDefault() {
         return isDefault;
@@ -68,5 +63,13 @@ public class Address implements Serializable {
 
     public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
+    }
+
+    public String getDetailed() {
+        return detailed;
+    }
+
+    public void setDetailed(String detailed) {
+        this.detailed = detailed;
     }
 }

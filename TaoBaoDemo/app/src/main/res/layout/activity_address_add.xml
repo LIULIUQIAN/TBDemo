@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.taobaodemo.widget.CnToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:navigationIcon="@drawable/icon_back_32px"
+        android:title="添加收件地址"
+        app:rightButtonText="保存" />
+
+
+    <View style="@style/line_vertical"
+        android:layout_marginTop="40dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/largePadding">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="收件人"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View style="@style/line_horizontal" />
+
+        <EditText
+            android:id="@+id/edittxt_consignee"
+            style="@style/editText_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入收件人姓名" />
+    </LinearLayout>
+
+    <View style="@style/line_vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/largePadding">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="联系电话"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View style="@style/line_horizontal" />
+
+        <EditText
+            android:id="@+id/edittxt_phone"
+            style="@style/editText_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入联系电话"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <View style="@style/line_vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/largePadding">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="联系地址"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View style="@style/line_horizontal" />
+
+        <EditText
+            android:id="@+id/txt_address"
+            style="@style/editText_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入联系地址" />
+    </LinearLayout>
+
+    <View style="@style/line_vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/largePadding">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="详细地址"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View style="@style/line_horizontal" />
+
+        <EditText
+            android:id="@+id/edittxt_add"
+            style="@style/editText_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入详细地址" />
+    </LinearLayout>
+    <View style="@style/line_vertical" />
+
+</LinearLayout>
