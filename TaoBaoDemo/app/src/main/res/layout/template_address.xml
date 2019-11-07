@@ -75,7 +75,7 @@
             android:drawableLeft="@drawable/icon_trash_32"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:text="编辑"
+            android:text="删除"
             android:textColor="@color/gray" />
 
     </RelativeLayout>

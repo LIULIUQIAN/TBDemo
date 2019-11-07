@@ -1,6 +1,8 @@
 package com.example.taobaodemo;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,9 +48,10 @@ public class AddressListActivity extends AppCompatActivity {
         addressData = new AddressData(this);
         mAddressAdapter.clear();
         List<Address> addresses = addressData.getAll();
-        if (addresses != null){
+        if (addresses != null) {
             mAddressAdapter.addData(addresses);
         }
+
 
 //        Map<String,Object> params = new HashMap<>();
 //        params.put("user_id", TBApplication.getInstance().getUser().getId());
@@ -84,8 +87,47 @@ public class AddressListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddressListActivity.this, AddressAddActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
+
+        mAddressAdapter.setAddressLisneter(new AddressAdapter.AddressLisneter() {
+            @Override
+            public void setDefault(Address address) {
+                addressData.update(address);
+            }
+
+            @Override
+            public void updateAddress(Address address) {
+                Intent intent = new Intent(AddressListActivity.this, AddressAddActivity.class);
+                intent.putExtra(AddressAddActivity.DEFAULT_ADS_KEY, address);
+                startActivityForResult(intent, 1);
+            }
+
+            @Override
+            public void deleterAddress(Address address) {
+                addressData.delete(address);
+
+                mAddressAdapter.clear();
+                List<Address> addresses = addressData.getAll();
+                if (addresses != null) {
+                    mAddressAdapter.addData(addresses);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+
+            mAddressAdapter.clear();
+            List<Address> addresses = addressData.getAll();
+            if (addresses != null) {
+                mAddressAdapter.addData(addresses);
+            }
+        }
     }
 }

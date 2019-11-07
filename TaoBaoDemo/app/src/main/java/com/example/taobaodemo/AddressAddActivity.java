@@ -16,16 +16,23 @@ import com.example.taobaodemo.widget.CnToolbar;
 
 public class AddressAddActivity extends AppCompatActivity {
 
+    public final static String DEFAULT_ADS_KEY = "default_address";
     private CnToolbar toolbar;
     private EditText edittxt_consignee;
     private EditText edittxt_phone;
     private EditText txt_address;
     private EditText edittxt_add;
 
+    private Address defaultAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_add);
+
+        if (getIntent().getSerializableExtra(DEFAULT_ADS_KEY) != null){
+            defaultAddress = (Address) getIntent().getSerializableExtra(DEFAULT_ADS_KEY);
+        }
         initView();
     }
 
@@ -52,6 +59,13 @@ public class AddressAddActivity extends AppCompatActivity {
                 addAds();
             }
         });
+
+        if (defaultAddress != null){
+            edittxt_consignee.setText(defaultAddress.getConsignee());
+            edittxt_phone.setText(defaultAddress.getPhone());
+            txt_address.setText(defaultAddress.getAddr());
+            edittxt_add.setText(defaultAddress.getDetailed());
+        }
     }
 
     private void addAds() {
@@ -80,6 +94,9 @@ public class AddressAddActivity extends AppCompatActivity {
 
         AddressData addressData = new AddressData(this);
         Address ads = new Address(consignee, phone, address, detailed);
+        if (defaultAddress != null){
+            ads.setId(defaultAddress.getId());
+        }
         addressData.put(ads);
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
