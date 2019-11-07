@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.taobaodemo.adapter.AddressAdapter;
+import com.example.taobaodemo.adapter.BaseAdapter;
 import com.example.taobaodemo.adapter.CollectionAdapter;
 import com.example.taobaodemo.bean.Address;
 import com.example.taobaodemo.bean.hot.Wares;
@@ -63,6 +64,16 @@ public class CollectionActivity extends AppCompatActivity {
                 adapter.clear();
                 adapter.addData(collectionData.getAll());
 
+            }
+        });
+
+        adapter.setmOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Wares wares = adapter.getItem(position);
+                Intent intent = new Intent(CollectionActivity.this, WareDetailActivity.class);
+                intent.putExtra(WareDetailActivity.WARES_KEY,wares);
+                startActivity(intent);
             }
         });
 

@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.taobaodemo.adapter.BaseAdapter;
 import com.example.taobaodemo.adapter.HotWaresAdapter;
 import com.example.taobaodemo.bean.hot.Page;
 import com.example.taobaodemo.bean.hot.Wares;
@@ -149,6 +151,16 @@ public class WareListActivity extends AppCompatActivity implements Pager.OnPageL
                 .build(this, new TypeToken<Page<Wares>>() {
                 }.getType());
         pager.refresh();
+
+        mAdapter.setmOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Wares wares = mAdapter.getItem(position);
+                Intent intent = new Intent(WareListActivity.this, WareDetailActivity.class);
+                intent.putExtra(WareDetailActivity.WARES_KEY,wares);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
