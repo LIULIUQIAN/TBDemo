@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.taobaodemo.AddressListActivity;
+import com.example.taobaodemo.CollectionActivity;
 import com.example.taobaodemo.LoginActivity;
 import com.example.taobaodemo.R;
 import com.example.taobaodemo.application.TBApplication;
@@ -32,6 +33,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private TextView txtUsername;
     private Button btnLogout;
     private TextView txtMyAddress;
+    private TextView txt_collection;
 
     TBApplication application = TBApplication.getInstance();
 
@@ -49,11 +51,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         txtUsername = rootView.findViewById(R.id.txt_username);
         btnLogout = rootView.findViewById(R.id.btn_logout);
         txtMyAddress = rootView.findViewById(R.id.txt_my_address);
+        txt_collection = rootView.findViewById(R.id.txt_collection);
 
         imgHead.setOnClickListener(this);
         txtUsername.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         txtMyAddress.setOnClickListener(this);
+        txt_collection.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +78,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.txt_my_address:
                 Intent intent = new Intent(getActivity(), AddressListActivity.class);
                 startActivity(intent,true);
+                break;
+            case R.id.txt_collection:
+                Intent collectionIntent = new Intent(getActivity(), CollectionActivity.class);
+                startActivity(collectionIntent,true);
                 break;
         }
 

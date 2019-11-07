@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.taobaodemo.bean.hot.Wares;
 import com.example.taobaodemo.utils.CartProvider;
+import com.example.taobaodemo.utils.CollectionData;
 import com.example.taobaodemo.widget.CnToolbar;
 
 import java.io.Serializable;
@@ -29,6 +30,7 @@ public class WareDetailActivity extends AppCompatActivity {
     private Wares wares;
     private WebAppInterface webAppInterface;
     private CartProvider cartProvider;
+    private CollectionData collectionData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,7 @@ public class WareDetailActivity extends AppCompatActivity {
         wares = (Wares) serializable;
 
         cartProvider = new CartProvider(this);
+        collectionData = new CollectionData(this);
     }
 
     class webViewClient extends WebViewClient{
@@ -145,6 +148,7 @@ public class WareDetailActivity extends AppCompatActivity {
         @JavascriptInterface
         public void buy(long id){
             Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
+            collectionData.put(wares);
         }
 
         @JavascriptInterface
